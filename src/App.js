@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import RenderedList from "./RenderedList";
-import { Button, TitleWrapper } from "./styles";
+import { Button, Title, Wrapper } from "./styles";
+import NavBar from "./NavBar";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import Home from "./Home";
+// import About from "./About";
+import Pricing from "./Pricing";
+import { Container } from "./styles/Container";
+import { GlobalStyle } from "./styles/Global";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +31,17 @@ const App = () => {
 
   return (
     <>
+      <Router>
+        <GlobalStyle />
+        <NavBar />
+        <Switch>
+          <Container>
+            <Route path="/" exact component={Home} />
+            <Route path="/pricing" component={Pricing} />
+          </Container>
+        </Switch>
+      </Router>
+
       <table>
         <thead>
           <tr>
@@ -37,8 +56,11 @@ const App = () => {
           <RenderedList items={products} />
         </tbody>
       </table>
+
       <Button pink>Search</Button>
-      <TitleWrapper>Hello</TitleWrapper>
+      <Wrapper>
+        <Title>Hello</Title>
+      </Wrapper>
     </>
   );
 };
